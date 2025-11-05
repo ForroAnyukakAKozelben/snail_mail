@@ -1,65 +1,63 @@
-email = input("Your email address: ")
-
-# "hello.worldcom"    => An email address has to contain a '@' character!
-# "he@llo@world.com"  => An email address cannot contain more than one '@' characters!
-# "@world.com"        => The username before the '@' character cannot be empty!
-# "hello@"            => The domain after the '@' character cannot be empty!
-# "hello@worldcom"    => An email address has to contain at least one '.' character!
-# "hell.o@worldcom"   => The domain has to contain at least one '.' character!
-# "he.llo@worldcom."  => The top-level domain cannot be empty!
-# "he.llo@worldco.m"  => The top-level domain has to be at least two characters long!
-# ".hello@world.com"  => The username cannot start with a '.' character!
-# "he.llo@.world.com" => The domain cannot start with a '.' character!
-# "hello@world.com"   => Valid email address :)
 
 
-email = input("Enter email: ")
-
-length_of_email = len(email)
 number_of_at_characters = email.count("@")
 number_of_dot_characters = email.count(".")
 position_of_at = email.find("@")
-position_of_first_dot = email.find(".")
 position_of_last_dot = email.rfind(".")
-position_of_first_dot_after_the_at = email.find(".", position_of_at)
 
-error_message_no_at = "An email address has to contain a '@' character!"
-error_message_too_many_at = "An email address cannot contain more than one '@' characters!"
-error_message_no_dot = "An email address has to contain at least one '.' character!" #asd
-error_message_no_username = "The username before the '@' character cannot be empty!" #asd
-error_message_no_dot_in_domain = "The domain has to contain at least one '.' character!" #asd
-error_message_no_server_name = "The domain cannot start with a '.' character!" #nimrod
-error_message_no_tld = "The top-level domain cannot be empty!" #nimrod
-error_message_short_tld = "The top-level domain has to be at least two characters long!" #nimrod
-error_message_no_domain = "The domain after the '@' character cannot be empty!"
-error_message_invalid_username = "The username cannot start with a '.' character!"
-
-
+error_message_no_at = "Hiba: hiányzik az '@' jel."
+error_message_too_many_at = "Hiba: túl sok '@' jel."
+error_message_no_dot = "Hiba: hiányzik a pont ('.')."
+error_message_no_username = "Hiba: nincs felhasználónév az '@' előtt."
+error_message_no_domain = "Hiba: nincs domain az '@' után."
+error_message_no_dot_in_domain = "Hiba: a domainben nincs pont."
+error_message_no_server_name = "Hiba: a domain ponttal kezdődik."
+error_message_no_tld = "Hiba: nincs TLD a domain végén."
+error_message_short_tld = "Hiba: a TLD túl rövid."
+error_message_invalid_username = "Hiba: a felhasználónév ponttal kezdődik."
 ok_message = "Valid email address :)"
+
 is_valid = True
-while is_valid:
-    if number_of_at_characters == 0:
-        print(error_message_no_at)
-    elif number_of_at_characters > 1:
-        print(error_message_too_many_at)
-    else:
+while is_valid
+    while True:
+        if number_of_at_characters == 0:
+            print(error_message_no_at)
+            break
+        elif number_of_at_characters > 1:
+            print(error_message_too_many_at)
+            break
+
         username = email[:position_of_at]
         domain = email[position_of_at + 1:]
-    if number_of_dot_characters == 0:
-        print(error_message_no_dot)
+
+        if number_of_dot_characters == 0:
+            print(error_message_no_dot)
+            break
+        if username == "":
+            print(error_message_no_username)
+            break
+        if domain == "":
+            print(error_message_no_domain)
+            break
+        if domain.count(".") == 0:
+            print(error_message_no_dot_in_domain)
+            break
+        if domain[0] == ".":
+            print(error_message_no_server_name)
+            break
+
+        tld = domain[position_of_last_dot + 1:]
+        if tld == "":
+            print(error_message_no_tld)
+            break
+        if len(tld) <= 2:
+            print(error_message_short_tld)
+            break
+        if username[0] == ".":
+            print(error_message_invalid_username)
+            break
+        is_valid = False
         break
-    if username == "":
-        print(error_message_no_username)
-        break
-    if domain.count(".") == 0:
-        print(error_message_no_dot_in_domain)
-        break
-    if domain.at(0) == ".":
-        print(error_message_no_server_name)
-        break
-    if domain[position_of_last_dot + 1] == "":
-        print(error_message_no_tld)
-        break
-    if len(domain[position_of_last_dot + 1]) < 2:
-        print(error_message_short_tld)
-        break
+
+print(ok_message)
+
