@@ -34,52 +34,15 @@ error_message_short_tld = "The top-level domain has to be at least two character
 error_message_no_domain = "The domain after the '@' character cannot be empty!"
 error_message_invalid_username = "The username cannot start with a '.' character!"
 
+
 ok_message = "Valid email address :)"
 is_valid = True
-
-# 1. '@' karakter ellenőrzése
-if number_of_at_characters == 0:
-    print(error_message_no_at)
-    is_valid = False
-elif number_of_at_characters > 1:
-    print(error_message_too_many_at)
-    is_valid = False
-else:
-    username = email[:position_of_at]
-    domain = email[position_of_at + 1:]
-
-    # 2. username és domain ellenőrzése
-    if username == "":
-        print(error_message_no_username)
-        is_valid = False
-    elif domain == "":
-        print(error_message_no_domain)
-        is_valid = False
-    elif username[0] == ".":
-        print(error_message_invalid_username)
-        is_valid = False
-    elif domain[0] == ".":
-        print(error_message_no_server_name)
-        is_valid = False
-    elif "." not in domain:
-        print(error_message_no_dot_in_domain)
-        is_valid = False
+while is_valid:
+    if number_of_at_characters == 0:
+        print(error_message_no_at)
+    elif number_of_at_characters > 1:
+        print(error_message_too_many_at)
     else:
-        # Top-level domain (TLD) ellenőrzése
-        last_dot_pos = domain.rfind(".")
-        tld = domain[last_dot_pos + 1:]
+        username = email[:position_of_at]
+        domain = email[position_of_at + 1:]
 
-        if tld == "":
-            print(error_message_no_tld)
-            is_valid = False
-        elif len(tld) < 2:
-            print(error_message_short_tld)
-            is_valid = False
-
-# 3. Általános '.' karakter ellenőrzése
-if is_valid and number_of_dot_characters == 0:
-    print(error_message_no_dot)
-    is_valid = False
-
-if is_valid:
-    print(ok_message)
