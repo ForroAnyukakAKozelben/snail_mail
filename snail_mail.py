@@ -28,9 +28,9 @@ error_message_too_many_at = "An email address cannot contain more than one '@' c
 error_message_no_dot = "An email address has to contain at least one '.' character!" #asd
 error_message_no_username = "The username before the '@' character cannot be empty!" #asd
 error_message_no_dot_in_domain = "The domain has to contain at least one '.' character!" #asd
-error_message_no_server_name = "The domain cannot start with a '.' character!"
-error_message_no_tld = "The top-level domain cannot be empty!"
-error_message_short_tld = "The top-level domain has to be at least two characters long!"
+error_message_no_server_name = "The domain cannot start with a '.' character!" #nimrod
+error_message_no_tld = "The top-level domain cannot be empty!" #nimrod
+error_message_short_tld = "The top-level domain has to be at least two characters long!" #nimrod
 error_message_no_domain = "The domain after the '@' character cannot be empty!"
 error_message_invalid_username = "The username cannot start with a '.' character!"
 
@@ -50,5 +50,16 @@ while is_valid:
         break
     if username == "":
         print(error_message_no_username)
+        break
     if domain.count(".") == 0:
         print(error_message_no_dot_in_domain)
+        break
+    if domain.at(0) == ".":
+        print(error_message_no_server_name)
+        break
+    if domain[position_of_last_dot + 1] == "":
+        print(error_message_no_tld)
+        break
+    if len(domain[position_of_last_dot + 1]) < 2:
+        print(error_message_short_tld)
+        break
